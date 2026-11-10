@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101318">
+  <title>Calculadora de financiación de coche</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div class="eyebrow">FINANCIACIÓN DE VEHÍCULOS</div>
+      <h1>¿Cuánto te cuesta<br><span>financiar tu coche?</span></h1>
+      <p class="intro">Compara el coste de financiarlo frente al precio al contado y calcula cuánto ahorrarías cancelando antes.</p>
+    </header>
+
+    <section class="panel inputs-panel" aria-label="Datos de la financiación">
+      <div class="section-heading">
+        <div><span class="step">01</span><h2>Precio del coche</h2></div>
+      </div>
+      <div class="field-grid">
+        <label class="field">
+          <span>Precio financiado (€)</span>
+          <input id="financedPrice" type="number" min="0" step="100" value="25000" inputmode="decimal">
+          <small>Precio del vehículo si lo compras financiado.</small>
+        </label>
+        <label class="field">
+          <span>Precio al contado (€)</span>
+          <input id="cashPrice" type="number" min="0" step="100" value="27000" inputmode="decimal">
+          <small>Precio si pagas el coche sin financiación.</small>
+        </label>
+        <label class="field">
+          <span>Entrada (€)</span>
+          <input id="downPayment" type="number" min="0" step="100" value="5000" inputmode="decimal">
+        </label>
+      </div>
+
+      <div class="section-heading second-heading">
+        <div><span class="step">02</span><h2>Condiciones del préstamo</h2></div>
+      </div>
+      <div class="field-grid">
+        <label class="field">
+          <span>Plazo (meses)</span>
+          <input id="months" type="number" min="1" max="480" step="1" value="96" inputmode="numeric">
+        </label>
+        <label class="field">
+          <span>TAE (%)</span>
+          <input id="apr" type="number" min="0" max="100" step="0.1" value="7" inputmode="decimal">
+        </label>
+      </div>
+
+      <div class="section-heading second-heading">
+        <div><span class="step">03</span><h2>Cancelación anticipada</h2></div>
+      </div>
+      <div class="field-grid">
+        <label class="field full">
+          <span class="range-label">¿En qué mes cancelarías el préstamo? <strong id="cancelMonthValue">48 meses</strong></span>
+          <input id="cancelMonth" class="range" type="range" min="0" max="96" value="48">
+          <div class="range-ends"><span>Al inicio</span><span>Al finalizar</span></div>
+        </label>
+        <label class="field">
+          <span>Comisión de cancelación (%)</span>
+          <input id="fee" type="number" min="0" max="100" step="0.1" value="0" inputmode="decimal">
+        </label>
+      </div>
+      <p class="hint">La cancelación se calcula justo después de pagar la cuota del mes seleccionado. El mes 0 significa cancelar al inicio.</p>
+    </section>
+
+    <section class="results" aria-live="polite">
+      <div class="result-top">
+        <div>
+          <div class="eyebrow">RESULTADO CON CANCELACIÓN ANTICIPADA</div>
+          <div class="total-label">Coste total de la compra</div>
+          <div class="big-total" id="totalPaid">—</div>
+          <div class="subtle" id="totalBreakdown">Entrada + cuotas + capital pendiente + comisión</div>
+        </div>
+        <div class="monthly">
+          <span>Cuota mensual</span>
+          <strong id="monthlyPayment">—</strong>
+        </div>
+      </div>
+
+      <div class="comparison">
+        <div class="comparison-title">¿Cuánto pagas de más?</div>
+        <div class="compare-row">
+          <span>Frente al precio financiado</span>
+          <strong id="extraFinanced" class="negative">—</strong>
+        </div>
+        <div class="compare-row highlight-row">
+          <span>Frente al precio al contado</span>
+          <strong id="extraCash" class="negative">—</strong>
+        </div>
+        <div class="compare-row">
+          <span>Coste si mantienes todo el préstamo</span>
+          <strong id="fullTermTotal">—</strong>
+        </div>
+        <div class="compare-row">
+          <span>Ahorro por cancelar antes</span>
+          <strong id="earlySavings" class="positive">—</strong>
+        </div>
+      </div>
+
+      <div class="details-grid">
+        <div class="detail"><span>Capital financiado</span><strong id="principal">—</strong></div>
+        <div class="detail"><span>Cuotas abonadas</span><strong id="paidInstallments">—</strong></div>
+        <div class="detail"><span>Capital pendiente</span><strong id="remainingBalance">—</strong></div>
+        <div class="detail"><span>Intereses abonados</span><strong id="interestPaid">—</strong></div>
+        <div class="detail"><span>Comisión de cancelación</span><strong id="feePaid">—</strong></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p><strong>Cómo se calcula:</strong> sistema de amortización francés, con cuotas constantes y tipo mensual equivalente a la TAE introducida.</p>
+      <p>Estimación orientativa. La TAE puede incluir costes que no forman parte del cálculo de la cuota contractual. La financiera puede calcular las cuotas usando el TIN y aplicar gastos, seguros, productos vinculados o comisiones adicionales. Comprueba las condiciones de tu oferta antes de contratar.</p>
+      <button id="reset" class="reset-button" type="button">Restablecer valores</button>
+    </footer>
+  </main>
+</body>
+</html>
