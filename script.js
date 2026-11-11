@@ -89,9 +89,11 @@
     var bar=function(tot){var base=Math.min(tot,pCon),ex=Math.max(0,tot-pCon);
       return '<i class="b-base" style="width:'+pc(base)+'"></i><i class="b-red" style="width:'+pc(ex)+'"></i>'};
     $('trC').innerHTML=bar(totC);$('trK').innerHTML=bar(totK);
+    var sw=$('scale').getBoundingClientRect().width||300;
+    var mark=function(txt,v){var w=txt.length*6.4+8,x=v/max*sw,l=Math.max(w/2,Math.min(sw-w/2,x));return '<span class="mark" style="left:'+l.toFixed(1)+'px">'+txt+'</span>'};
     $('scale').innerHTML=
-      '<span class="mark" style="left:'+pc(pCon)+'">Contado '+eur(pCon)+'</span>'+
-      (Math.abs(pFin-pCon)/max>.12?'<span class="mark" style="left:'+pc(pFin)+'">Financiado '+eur(pFin)+'</span>':'');
+      mark('Contado '+eur(pCon),pCon)+
+      (Math.abs(pFin-pCon)/max>.12?mark('Financiado '+eur(pFin),pFin):'');
     $('hCancel').textContent=k>=n?'Sin cancelar':'Cancelando en el mes '+k;
     $('totC').textContent=eur(totC);$('totK').textContent=eur(totK);
     $('exCC').textContent=sign(totC-pCon);$('exFC').textContent=sign(totC-pFin);
