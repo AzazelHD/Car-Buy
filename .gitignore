@@ -1,0 +1,18 @@
+# Archivos comprimidos
+*.zip
+*.rar
+*.7z
+*.tar.gz
+
+# Dependencias
+node_modules/
+
+# Entornos virtuales
+.env
+*.log
+__pycache__/
+*.pyc
+
+# Sistema
+.DS_Store
+Thumbs.db
