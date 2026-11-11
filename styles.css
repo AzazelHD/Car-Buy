@@ -114,10 +114,10 @@ input[type=range]:focus-visible{outline:2px solid var(--accent);outline-offset:4
 .xtra{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr);gap:0;align-content:start;min-width:0}
 .xtra .xh,.xtra .xr{display:contents}
 .xtra .xh span{font-size:clamp(.68rem,1.2vw,.76rem);line-height:1.2;color:var(--muted);text-align:right;padding:0 8px 6px;min-width:0;overflow-wrap:anywhere}
-.xtra .xr>*{padding:8px;border-top:1px solid var(--line);align-self:center;min-width:0;line-height:1.2}
-.xtra .xr span{color:var(--muted);font-size:clamp(.74rem,1.25vw,.85rem);overflow-wrap:anywhere}
-.xtra .xr strong{font-size:clamp(.82rem,1.35vw,1.05rem);font-weight:800;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
-.xtra .xr b{font-size:clamp(.76rem,1.3vw,.95rem);font-weight:600;text-align:right;white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums}
+.xtra .xr>*{display:flex;align-items:center;padding:8px;border-top:1px solid var(--line);align-self:stretch;min-width:0;line-height:1.2}
+.xtra .xr span{justify-content:flex-start;color:var(--muted);font-size:clamp(.74rem,1.25vw,.85rem);overflow-wrap:anywhere}
+.xtra .xr strong{justify-content:flex-end;font-size:clamp(.82rem,1.35vw,1.05rem);font-weight:800;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.xtra .xr b{justify-content:flex-end;font-size:clamp(.76rem,1.3vw,.95rem);font-weight:600;text-align:right;white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums}
 .xtra .xr.red>*{background:var(--bad-bg);border-top-color:transparent}
 .xtra .xr.red>:first-child{border-radius:10px 0 0 10px;padding-left:10px;color:#ffb0b8}
 .xtra .xr.red>:last-child{border-radius:0 10px 10px 0;padding-right:10px;color:#ff8d98}
@@ -170,8 +170,8 @@ tr.cur{background:rgba(124,196,255,.16);font-weight:700}
   .xtra{display:flex;flex-direction:column;gap:8px}
   .xtra .xh{display:none}
   .xtra .xr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2px 12px;padding:9px 11px;border:1px solid var(--line);border-radius:12px;background:var(--bg);min-width:0}
-  .xtra .xr>span{grid-column:1/-1;padding:0 0 3px;border:0;font-size:.76rem;font-weight:600;color:var(--text);overflow-wrap:anywhere}
-  .xtra .xr strong,.xtra .xr b{padding:0;border:0;text-align:left;white-space:nowrap;font-size:1rem;line-height:1.25;background:none}
+  .xtra .xr>span{display:block;grid-column:1/-1;padding:0 0 3px;border:0;font-size:.76rem;font-weight:600;color:var(--text);overflow-wrap:anywhere}
+  .xtra .xr strong,.xtra .xr b{display:block;padding:0;border:0;text-align:left;white-space:nowrap;font-size:1rem;line-height:1.25;background:none}
   .xtra .xr strong::before,.xtra .xr b::before{display:block;font-size:.66rem;font-weight:600;color:var(--muted);margin-bottom:1px}
   .xtra .xr strong::before{content:"Cancelando"}
   .xtra .xr b::before{content:"Manteniendo"}
