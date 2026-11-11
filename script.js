@@ -89,11 +89,11 @@
     var bar=function(tot){var base=Math.min(tot,pCon),ex=Math.max(0,tot-pCon);
       return '<i class="b-base" style="width:'+pc(base)+'"></i><i class="b-red" style="width:'+pc(ex)+'"></i>'};
     $('trC').innerHTML=bar(totC);$('trK').innerHTML=bar(totK);
-    var sw=$('scale').getBoundingClientRect().width||300;
-    var mark=function(txt,v){var w=txt.length*6.4+8,x=v/max*sw,l=Math.max(w/2,Math.min(sw-w/2,x));return '<span class="mark" style="left:'+l.toFixed(1)+'px">'+txt+'</span>'};
-    $('scale').innerHTML=
-      mark('Contado '+eur(pCon),pCon)+
-      (Math.abs(pFin-pCon)/max>.12?mark('Financiado '+eur(pFin),pFin):'');
+    var sc=$('scale'),sw=sc.getBoundingClientRect().width||300;
+    var xCon=Math.max(0,Math.min(sw,pCon/max*sw));
+    sc.innerHTML='<span class="tick" style="left:'+xCon.toFixed(1)+'px"></span><span class="mark">Contado '+eur(pCon)+'</span>';
+    var mk=sc.querySelector('.mark'),mw=mk.getBoundingClientRect().width||120;
+    mk.style.left=Math.max(mw/2,Math.min(sw-mw/2,xCon)).toFixed(1)+'px';
     $('hCancel').textContent=k>=n?'Sin cancelar':'Cancelando en el mes '+k;
     $('totC').textContent=eur(totC);$('totK').textContent=eur(totK);
     $('exCC').textContent=sign(totC-pCon);$('exFC').textContent=sign(totC-pFin);
@@ -105,4 +105,5 @@
   ['pFin','pCon','ent','mes','tin','ap','fin','com','cancel'].forEach(function(id){$(id).addEventListener('input',calc)});
   calc();
   if(window.ResizeObserver)new ResizeObserver(function(){calc()}).observe($('chart'));else window.addEventListener('resize',calc);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){calc()});
 })();
