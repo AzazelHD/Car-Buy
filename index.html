@@ -2,120 +2,103 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101318">
-  <title>Calculadora de financiación de coche</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f1420">
+  <meta name="description" content="Calcula cuánto cuesta financiar tu coche y cuánto puedes ahorrar cancelando antes el préstamo.">
+  <title>Simulador de financiación de coche</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
 <body>
-  <main class="app">
-    <header class="header">
-      <div class="eyebrow">FINANCIACIÓN DE VEHÍCULOS</div>
-      <h1>¿Cuánto te cuesta<br><span>financiar tu coche?</span></h1>
-      <p class="intro">Compara el coste de financiarlo frente al precio al contado y calcula cuánto ahorrarías cancelando antes.</p>
+  <main class="app-shell">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">COMPARADOR DE COSTES</p>
+        <h1>¿Cuánto cuesta financiar tu coche?</h1>
+        <p class="subtitle">Ajusta las condiciones y descubre cuánto pagarás de verdad.</p>
+      </div>
+      <div class="header-tag"><span class="status-dot"></span> Simulador interactivo</div>
     </header>
 
-    <section class="panel inputs-panel" aria-label="Datos de la financiación">
-      <div class="section-heading">
-        <div><span class="step">01</span><h2>Precio del coche</h2></div>
-      </div>
-      <div class="field-grid">
-        <label class="field">
-          <span>Precio financiado (€)</span>
-          <input id="financedPrice" type="number" min="0" step="100" value="25000" inputmode="decimal">
-          <small>Precio del vehículo si lo compras financiado.</small>
-        </label>
-        <label class="field">
-          <span>Precio al contado (€)</span>
-          <input id="cashPrice" type="number" min="0" step="100" value="27000" inputmode="decimal">
-          <small>Precio si pagas el coche sin financiación.</small>
-        </label>
-        <label class="field">
-          <span>Entrada (€)</span>
-          <input id="downPayment" type="number" min="0" step="100" value="5000" inputmode="decimal">
-        </label>
-      </div>
-
-      <div class="section-heading second-heading">
-        <div><span class="step">02</span><h2>Condiciones del préstamo</h2></div>
-      </div>
-      <div class="field-grid">
-        <label class="field">
-          <span>Plazo (meses)</span>
-          <input id="months" type="number" min="1" max="480" step="1" value="96" inputmode="numeric">
-        </label>
-        <label class="field">
-          <span>TAE (%)</span>
-          <input id="apr" type="number" min="0" max="100" step="0.1" value="7" inputmode="decimal">
-        </label>
-      </div>
-
-      <div class="section-heading second-heading">
-        <div><span class="step">03</span><h2>Cancelación anticipada</h2></div>
-      </div>
-      <div class="field-grid">
-        <label class="field full">
-          <span class="range-label">¿En qué mes cancelarías el préstamo? <strong id="cancelMonthValue">48 meses</strong></span>
-          <input id="cancelMonth" class="range" type="range" min="0" max="96" value="48">
-          <div class="range-ends"><span>Al inicio</span><span>Al finalizar</span></div>
-        </label>
-        <label class="field">
-          <span>Comisión de cancelación (%)</span>
-          <input id="fee" type="number" min="0" max="100" step="0.1" value="0" inputmode="decimal">
-        </label>
-      </div>
-      <p class="hint">La cancelación se calcula justo después de pagar la cuota del mes seleccionado. El mes 0 significa cancelar al inicio.</p>
-    </section>
-
-    <section class="results" aria-live="polite">
-      <div class="result-top">
-        <div>
-          <div class="eyebrow">RESULTADO CON CANCELACIÓN ANTICIPADA</div>
-          <div class="total-label">Coste total de la compra</div>
-          <div class="big-total" id="totalPaid">—</div>
-          <div class="subtle" id="totalBreakdown">Entrada + cuotas + capital pendiente + comisión</div>
+    <div class="dashboard">
+      <section class="card hero-card" aria-labelledby="saving-title">
+        <div class="hero-heading">
+          <div>
+            <p class="section-kicker" id="saving-title">AHORRO POR CANCELAR ANTES</p>
+            <p class="hero-value" id="ahorro">—</p>
+            <p class="hero-caption" id="ahorroTxt" aria-live="polite">Calculando…</p>
+          </div>
+          <div class="hero-pill" id="mesPill">Mes 24</div>
         </div>
-        <div class="monthly">
-          <span>Cuota mensual</span>
-          <strong id="monthlyPayment">—</strong>
+        <div class="chart-wrap">
+          <svg class="chart" id="chart" viewBox="0 0 640 210" role="img" aria-label="Evolución del capital pendiente"></svg>
         </div>
-      </div>
+        <div class="slider-block">
+          <div class="slider-heading"><label for="cancel">Mes en el que cancelas</label><strong><span id="mesLbl">24</span> <small>/ <span id="tickEnd">72</span> meses</small></strong></div>
+          <input id="cancel" type="range" min="0" max="72" step="1" value="24" aria-label="Mes de cancelación">
+          <div class="range-labels"><span>Hoy</span><span>Fin del préstamo</span></div>
+        </div>
+      </section>
 
-      <div class="comparison">
-        <div class="comparison-title">¿Cuánto pagas de más?</div>
-        <div class="compare-row">
-          <span>Frente al precio financiado</span>
-          <strong id="extraFinanced" class="negative">—</strong>
+      <section class="card inputs-card" aria-labelledby="inputs-title">
+        <div class="card-heading"><div><p class="section-kicker">CONFIGURACIÓN</p><h2 id="inputs-title">Datos de la compra</h2></div><span class="heading-icon">€</span></div>
+        <div class="input-grid">
+          <div class="field"><label for="pFin">Precio financiado</label><div class="input-wrap"><input id="pFin" type="number" min="0" step="100" value="19400" inputmode="decimal"><span>€</span></div></div>
+          <div class="field"><label for="pCon">Precio al contado</label><div class="input-wrap"><input id="pCon" type="number" min="0" step="100" value="21900" inputmode="decimal"><span>€</span></div></div>
+          <div class="field"><label for="ent">Entrada</label><div class="input-wrap"><input id="ent" type="number" min="0" step="100" value="0" inputmode="decimal"><span>€</span></div></div>
+          <div class="field"><label for="mes">Plazo</label><div class="input-wrap"><input id="mes" type="number" min="1" max="120" step="1" value="72" inputmode="numeric"><span>meses</span></div></div>
+          <div class="field"><label for="tin">TIN</label><div class="input-wrap"><input id="tin" type="number" min="0" max="60" step="0.05" value="8" inputmode="decimal"><span>%</span></div></div>
+          <div class="field"><label for="ap">Comisión de apertura</label><div class="input-wrap"><input id="ap" type="number" min="0" max="10" step="0.1" value="1.5" inputmode="decimal"><span>%</span></div></div>
+          <div class="field"><label for="fin">Cuota final <small>(opcional)</small></label><div class="input-wrap"><input id="fin" type="number" min="0" step="100" value="0" inputmode="decimal"><span>€</span></div></div>
+          <div class="field"><label for="com">Comisión de cancelación</label><div class="input-wrap"><input id="com" type="number" min="0" max="10" step="0.1" value="1" inputmode="decimal"><span>%</span></div></div>
         </div>
-        <div class="compare-row highlight-row">
-          <span>Frente al precio al contado</span>
-          <strong id="extraCash" class="negative">—</strong>
+        <p class="error-message" id="err" role="alert"></p>
+        <div class="loan-summary">
+          <div><span>Importe del préstamo</span><strong id="cap">—</strong></div>
+          <div><span>Cuota mensual</span><strong id="cuota">—</strong></div>
         </div>
-        <div class="compare-row">
-          <span>Coste si mantienes todo el préstamo</span>
-          <strong id="fullTermTotal">—</strong>
-        </div>
-        <div class="compare-row">
-          <span>Ahorro por cancelar antes</span>
-          <strong id="earlySavings" class="positive">—</strong>
-        </div>
-      </div>
+      </section>
 
-      <div class="details-grid">
-        <div class="detail"><span>Capital financiado</span><strong id="principal">—</strong></div>
-        <div class="detail"><span>Cuotas abonadas</span><strong id="paidInstallments">—</strong></div>
-        <div class="detail"><span>Capital pendiente</span><strong id="remainingBalance">—</strong></div>
-        <div class="detail"><span>Intereses abonados</span><strong id="interestPaid">—</strong></div>
-        <div class="detail"><span>Comisión de cancelación</span><strong id="feePaid">—</strong></div>
-      </div>
-    </section>
+      <section class="card kpi-card" aria-label="Situación del préstamo">
+        <div class="card-heading compact-heading"><div><p class="section-kicker">EN EL MES SELECCIONADO</p><h2>Estado del préstamo</h2></div></div>
+        <div class="kpi-list">
+          <article class="kpi-item"><span>Capital pendiente</span><strong id="pend">—</strong><small id="pendTxt"></small></article>
+          <article class="kpi-item"><span>Comisión de cancelación</span><strong id="comis">—</strong><small id="comisTxt"></small></article>
+          <article class="kpi-item amortized-item"><div class="ring"><svg width="46" height="46" viewBox="0 0 54 54" aria-hidden="true"><circle cx="27" cy="27" r="21" fill="none" stroke="var(--line)" stroke-width="7"/><circle id="ringArc" cx="27" cy="27" r="21" fill="none" stroke="var(--good)" stroke-width="7" stroke-linecap="round" stroke-dasharray="0 132" transform="rotate(-90 27 27)"/></svg><div><span>Capital amortizado</span><strong id="pagadas">—</strong></div></div><small id="pagadasTxt"></small></article>
+        </div>
+      </section>
 
-    <footer class="footer">
-      <p><strong>Cómo se calcula:</strong> sistema de amortización francés, con cuotas constantes y tipo mensual equivalente a la TAE introducida.</p>
-      <p>Estimación orientativa. La TAE puede incluir costes que no forman parte del cálculo de la cuota contractual. La financiera puede calcular las cuotas usando el TIN y aplicar gastos, seguros, productos vinculados o comisiones adicionales. Comprueba las condiciones de tu oferta antes de contratar.</p>
-      <button id="reset" class="reset-button" type="button">Restablecer valores</button>
-    </footer>
+      <section class="card costs-card" aria-labelledby="costs-title">
+        <div class="card-heading"><div><p class="section-kicker">COMPARACIÓN</p><h2 id="costs-title">Lo que pagas por el coche</h2></div></div>
+        <div class="bar-group">
+          <div class="bar-row"><div class="bar-label"><span id="hCancel">Cancelando en el mes 24</span><strong id="totC">—</strong></div><div class="bar-track" id="trC" aria-label="Coste cancelando anticipadamente"></div></div>
+          <div class="bar-row muted-row"><div class="bar-label"><span>Manteniendo el préstamo</span><strong id="totK">—</strong></div><div class="bar-track small-track" id="trK" aria-label="Coste manteniendo el préstamo"></div></div>
+        </div>
+        <div class="scale" id="scale"></div>
+        <div class="comparison-table">
+          <div class="comparison-head"><span></span><span>Cancelando</span><span>Manteniendo</span></div>
+          <div class="comparison-line highlighted"><span>Extra vs. contado</span><strong id="exCC">—</strong><b id="exCK">—</b></div>
+          <div class="comparison-line"><span>Extra vs. financiado</span><strong id="exFC">—</strong><b id="exFK">—</b></div>
+        </div>
+      </section>
+
+      <section class="card offer-card" aria-labelledby="offer-title">
+        <div class="card-heading offer-heading"><div><p class="section-kicker">DETALLE DEL CRÉDITO</p><h2 id="offer-title">Tu oferta</h2></div><button type="button" class="secondary-button" id="openTable">Ver cuotas <span>↗</span></button></div>
+        <dl class="offer-grid">
+          <div><dt>TIN</dt><dd id="fTin">—</dd></div>
+          <div class="accent-value"><dt>TAE estimada</dt><dd id="fTae">—</dd></div>
+          <div><dt>Cuota final</dt><dd id="fFin">—</dd></div>
+          <div><dt>Comisión de apertura</dt><dd id="fAp">—</dd></div>
+          <div><dt>Total adeudado</dt><dd id="fTot">—</dd></div>
+          <div><dt>Coste del crédito</dt><dd id="fCoste">—</dd></div>
+        </dl>
+      </section>
+    </div>
   </main>
+
+  <dialog id="dlg" aria-labelledby="dialog-title"><div class="dialog-header"><div><p class="section-kicker">DESGLOSE MENSUAL</p><h2 id="dialog-title">Cuadro de amortización</h2></div><button type="button" class="secondary-button" id="closeDlg">Cerrar <span>×</span></button></div><div class="dialog-scroll"><table id="tbl"></table></div></dialog>
 </body>
 </html>
