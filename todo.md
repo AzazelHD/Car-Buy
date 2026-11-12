@@ -35,3 +35,9 @@
 - `ahorro = intereses futuros evitados − comisión de cancelación`.
 - **Al cambiar `styles.css` o `script.js`, subir el `?v=` de `index.html`** (p. ej. `?v=<hash-del-commit>`). Si no, el navegador puede seguir usando la versión antigua y la página quedará en blanco.
 - Si alguien ve la página vacía: recarga forzada con `Ctrl+F5` (`Cmd+Shift+R` en Mac).
+
+## Decisiones
+
+- **La comisión de cancelación se aplica también en el mes 0** (decisión del 12/11/2026). No se añade campo de permanencia mínima ni se hace gratis el mes 0: el usuario prefiere no meter más campos.
+  - Con los valores por defecto, cancelar en el mes 0 cuesta 19.885 € = 19.400 € de capital + 291 € de apertura + 194 € de cancelación (1 %).
+  - Si algún día se quisiera cambiar, basta con `comision=(k===0||k>=n)?0:pend*com;` en `script.js`; no requiere tocar el HTML.
