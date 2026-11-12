@@ -47,8 +47,21 @@ label{display:block;font-size:.85rem;color:var(--muted);margin:0 0 5px}
 /* hero */
 .hero{background:linear-gradient(160deg,var(--surface2),var(--surface));padding:22px 20px 18px}
 .hero-top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.hero-main{min-width:0}
+.eyebrow{margin:0 0 2px;font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--good)}
+.eyebrow.muted{color:var(--muted)}
 .hero .big{font-size:clamp(2.6rem,9vw,4.2rem);font-weight:800;letter-spacing:-.035em;line-height:1;margin:0}
-.hero .cap{color:var(--muted);margin:6px 0 0;max-width:34ch}
+.hero .cap{color:var(--muted);margin:6px 0 0;max-width:52ch}
+.hero-extra{flex:none;align-self:flex-end;text-align:right;background:var(--bad-bg);border:1px solid rgba(255,92,108,.35);border-radius:12px;padding:7px 11px;max-width:20ch}
+.hero-extra-lbl{display:block;font-size:.66rem;line-height:1.2;color:#ffb0b8}
+.hero-extra strong{display:block;font-size:clamp(1.05rem,2vw,1.45rem);font-weight:800;color:var(--bad);font-variant-numeric:tabular-nums;margin-top:1px}
+.hero-extra.pos{background:rgba(95,211,160,.12);border-color:rgba(95,211,160,.35)}
+.hero-extra.pos .hero-extra-lbl{color:#9fe8c8}
+.hero-extra.pos strong{color:var(--good)}
+@media(max-width:640px){
+  .hero-extra{align-self:stretch;width:100%;max-width:none;display:flex;align-items:baseline;justify-content:space-between;gap:10px;text-align:left}
+  .hero-extra strong{margin-top:0}
+}
 .pos{color:var(--good)}
 .chip{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-weight:600;font-size:.92rem}
 svg.chart{width:100%;height:0;flex:1 1 0;min-height:230px;display:block;margin-top:14px;overflow:visible}
@@ -81,6 +94,8 @@ input[type=range]:focus-visible{outline:2px solid var(--accent);outline-offset:4
 .bl span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bl b{flex:0 0 auto}
 .bl b{font-variant-numeric:tabular-nums}
+.main-bar .bl b{font-size:1rem;font-weight:800}
+.dim-bar .bl b{font-size:.85rem;font-weight:600}
 .track{position:relative;background:var(--bg);border-radius:10px;overflow:hidden;display:flex}
 .track i{display:block;height:100%}
 .b-base{background:#4a6fa5}.b-red{background:var(--bad)}
