@@ -25,6 +25,7 @@
 - [x] Tabla comparativa en tarjetas apiladas en móvil.
 - [x] Igualar el alto de las celdas de la fila roja.
 - [x] Resaltar el ahorro y el sobrecoste de financiar en el héroe.
+- [x] Mostrar también el "extra vs. financiado" en el héroe (segunda línea del badge).
 
 ## Notas
 

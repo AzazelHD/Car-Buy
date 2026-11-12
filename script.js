@@ -50,6 +50,7 @@
     $('ahorroLbl').className='eyebrow'+(ahorro>0.005?'':' muted');
     var extraC=totC-pCon,less=extraC<=0.005;
     $('heroExtra').textContent=eur(Math.abs(extraC));
+    $('heroExtraFin').textContent=sign(totC-pFin);
     $('heroExtraBox').className='hero-extra'+(less?' pos':'');
     $('heroExtraLbl').textContent=less?'Pagas menos que al contado':'Pagas de más que al contado';
     $('ahorroTxt').textContent=k>=n?'No hay cancelación anticipada: pagas el préstamo completo.'
