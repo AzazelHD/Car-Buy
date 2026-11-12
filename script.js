@@ -47,12 +47,12 @@
     var big=$('ahorro');
     big.textContent=eur(ahorro);
     big.className='big'+(ahorro>0.005?' pos':'');
-    $('ahorroLbl').className='eyebrow'+(ahorro>0.005?'':' muted');
+    var lbl=$('ahorroLbl');if(lbl)lbl.className='eyebrow'+(ahorro>0.005?'':' muted');
     var extraC=totC-pCon,less=extraC<=0.005;
-    $('heroExtra').textContent=eur(Math.abs(extraC));
-    $('heroExtraFin').textContent=sign(totC-pFin);
-    $('heroExtraBox').className='hero-extra'+(less?' pos':'');
-    $('heroExtraLbl').textContent=less?'Pagas menos que al contado':'Pagas de más que al contado';
+    var hx=$('heroExtra');if(hx)hx.textContent=eur(Math.abs(extraC));
+    var hxf=$('heroExtraFin');if(hxf)hxf.textContent=sign(totC-pFin);
+    var hxb=$('heroExtraBox');if(hxb)hxb.className='hero-extra'+(less?' pos':'');
+    var hxl=$('heroExtraLbl');if(hxl)hxl.textContent=less?'Pagas menos que al contado':'Pagas de más que al contado';
     $('ahorroTxt').textContent=k>=n?'No hay cancelación anticipada: pagas el préstamo completo.'
       :ahorro>0.005?'de ahorro por cancelar antes de llegar al mes '+n+'.'
       :'Aquí la comisión pesa más que los intereses que te ahorras.';

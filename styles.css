@@ -11,6 +11,7 @@ body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.5 "Manrope"
 main{max-width:1680px;min-height:100vh;margin:0 auto;padding:26px 16px 32px;padding-top:calc(20px + env(safe-area-inset-top,0px));padding-bottom:calc(24px + env(safe-area-inset-bottom,0px))}
 h1{font-size:clamp(1.45rem,4vw,2.05rem);font-weight:800;margin:0 0 4px;letter-spacing:-.02em}
 .sub{color:var(--muted);margin:0 0 22px}
+.warn{margin:0 0 16px;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,189,89,.4);background:rgba(255,189,89,.12);color:#ffd79a;font-size:.9rem}
 .grid{display:grid;gap:16px;grid-template-columns:repeat(12,minmax(0,1fr));min-width:0}
 .grid>*{min-width:0}
 .stack{display:contents}

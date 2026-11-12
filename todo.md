@@ -26,8 +26,12 @@
 - [x] Igualar el alto de las celdas de la fila roja.
 - [x] Resaltar el ahorro y el sobrecoste de financiar en el héroe.
 - [x] Mostrar también el "extra vs. financiado" en el héroe (segunda línea del badge).
+- [x] Evitar que un `script.js` cacheado deje la página en blanco: URLs versionadas (`?v=`) y comprobaciones de existencia.
+- [x] Aviso si JavaScript está desactivado y mensaje de error si los cálculos no cargan.
 
 ## Notas
 
 - El "extra vs. contado" mezcla dos cosas: la diferencia de precio entre financiado y contado, más los intereses y comisiones. El "extra vs. financiado" aísla solo el coste del préstamo.
 - `ahorro = intereses futuros evitados − comisión de cancelación`.
+- **Al cambiar `styles.css` o `script.js`, subir el `?v=` de `index.html`** (p. ej. `?v=<hash-del-commit>`). Si no, el navegador puede seguir usando la versión antigua y la página quedará en blanco.
+- Si alguien ve la página vacía: recarga forzada con `Ctrl+F5` (`Cmd+Shift+R` en Mac).

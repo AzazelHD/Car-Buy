@@ -7,10 +7,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=fc3a4b8">
 </head>
 <body>
 <main>
+  <noscript><p class="warn">Este simulador necesita JavaScript para calcular los importes. Actívalo y recarga la página.</p></noscript>
   <h1>¿Cuánto cuesta de verdad financiar tu coche?</h1>
   <p class="sub">Mueve el deslizador y mira cuánto ahorras al cancelar el préstamo antes de tiempo.</p>
 
@@ -112,6 +113,15 @@
 </main>
 
 <dialog id="dlg" aria-label="Cuadro de amortización"><div class="dh"><h2>Cuadro de amortización</h2><button type="button" class="btn" id="closeDlg">Cerrar</button></div><div class="dscroll"><table id="tbl"></table></div></dialog>
-<script src="script.js" defer></script>
+<script src="script.js?v=fc3a4b8" defer></script>
+<script>
+setTimeout(function(){
+  var a=document.getElementById('ahorro');
+  if(a&&a.textContent.trim()==='–'){
+    var e=document.getElementById('err');
+    if(e)e.textContent='No se pudieron cargar los cálculos. Recarga con Ctrl+F5 (Cmd+Shift+R en Mac).';
+  }
+},2000);
+</script>
 </body>
 </html>
